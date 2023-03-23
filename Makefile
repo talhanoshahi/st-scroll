@@ -4,10 +4,7 @@ include config.mk
 
 all: scroll
 
-config.h:
-	cp config.def.h config.h
-
-scroll: scroll.c config.h
+scroll: scroll.c
 
 install: scroll
 	mkdir -p $(DESTDIR)$(BINDIR) $(DESTDIR)$(MANDIR)/man1
@@ -29,11 +26,11 @@ clean:
 	rm -f scroll ptty
 
 distclean: clean
-	rm -f config.h scroll-$(VERSION).tar.gz
+	rm -f scroll-$(VERSION).tar.gz
 
 dist: clean
 	mkdir -p scroll-$(VERSION)
-	cp -R README scroll.1 TODO Makefile config.mk config.def.h \
+	cp -R README scroll.1 TODO Makefile config.mk config.h \
 		ptty.c scroll.c up.sh up.log \
 		scroll-$(VERSION)
 	tar -cf - scroll-$(VERSION) | gzip > scroll-$(VERSION).tar.gz
